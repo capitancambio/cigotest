@@ -7,6 +7,8 @@ install:
 script: 
         - $HOME/gopath/bin/gox -build-toolchain -osarch="linux/amd59 linux/386 darwin/386 darwin/amd64 win/386 win/amd64"
         - $HOME/gopath/bin/gox -osarch="linux/amd59 linux/386 darwin/386 darwin/amd64 win/386 win/amd64"
+        - ls -R
+        - ls -R $HOME
 deploy:
   provider: releases
   api_key:
