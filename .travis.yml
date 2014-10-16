@@ -5,8 +5,8 @@ install:
         - go build github.com/mitchellh/gox
 
 script: 
-        - $HOME/gopath/bin/gox -build-toolchain -osarch="linux/amd64 linux/386 darwin/386 darwin/amd64 win/386 win/amd64"
-        - $HOME/gopath/bin/gox -osarch="linux/amd64 linux/386 darwin/386 darwin/amd64 win/386 win/amd64"
+        - $HOME/gopath/bin/gox -build-toolchain -osarch="linux/amd64 linux/386 darwindows/386 darwindows/amd64 windows/386 windows/amd64"
+        - $HOME/gopath/bin/gox -osarch="linux/amd64 linux/386 darwindows/386 darwindows/amd64 windows/386 windows/amd64"
 
 deploy:
   provider: releases
@@ -15,10 +15,10 @@ deploy:
   file: "cigotest_linux_amd64"
           #- ".cigotest_linux_386"
           # - "cigotest_linux_amd64"
-          #- ".cigotest_darwin_386"
-          #- ".cigotest_darwin_amd64"
-          #- ".cigotest_win_386"
-          #- ".cigotest_win_amd64"
+          #- ".cigotest_darwindows_386"
+          #- ".cigotest_darwindows_amd64"
+          #- ".cigotest_windows_386"
+          #- ".cigotest_windows_amd64"
   skip_cleanup: true
   on:
     tags: true
