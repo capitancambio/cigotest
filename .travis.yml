@@ -1,0 +1,16 @@
+language: go 
+        - 1.3
+script: gox -osarch="linux/amd59 linux/386 darwin/386 darwin/amd64 win/386 win/amd64"
+deploy:
+  provider: releases
+  api_key:
+    secure: Hx8BYRzoUTL724uMiyZ4uEv229x8olxRzMl/ZCNVpseslcWFRROWaZ47nC9oHKMMWdSQitpJRzj1SC5f4pAb+WhaPxtjN04DOyM9dOokb0m2VXjNb1jA/as3JuaTXZgAW5GAb/wD9eKVILHRsQbjieY5EDl6d4HK1iH//BJej5E=
+  file: 
+          - ".cigotest_linux_386"
+          - ".cigotest_linux_amd64"
+          - ".cigotest_darwin_386"
+          - ".cigotest_darwin_amd64"
+          - ".cigotest_win_386"
+          - ".cigotest_win_amd64"
+  on:
+    repo: capitancambio/cigotest
