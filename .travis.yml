@@ -4,7 +4,7 @@ install:
         - go get github.com/mitchellh/gox
         - go build github.com/mitchellh/gox
 
-script: gox -osarch="linux/amd59 linux/386 darwin/386 darwin/amd64 win/386 win/amd64"
+script: $HOME/gopath/bin/gox -osarch="linux/amd59 linux/386 darwin/386 darwin/amd64 win/386 win/amd64"
 deploy:
   provider: releases
   api_key:
