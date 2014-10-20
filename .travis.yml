@@ -6,12 +6,13 @@ env:
 install:
         - go get github.com/mitchellh/gox
         - go build github.com/mitchellh/gox
+        - go get github.com/capitancambio/deployer
+        - go build github.com/capitancambio/deployer
+        - ls $HOME/gopath/bin/
 script:
         - $HOME/gopath/bin/gox -build-toolchain -osarch="linux/amd64 linux/386 darwindows/386
           darwindows/amd64 windows/386 windows/amd64"
         - $HOME/gopath/bin/gox -osarch="linux/amd64 linux/386 darwindows/386 darwindows/amd64
           windows/386 windows/amd64"
 after_success:
-        - go get github.com/capitancambio/deployer
-        - go build github.com/capitancambio/deployer
         - $HOME/gopath/bin/deployer -token=$TOKEN -files=cigotest_darwin_amd64,cigotest_darwin_386,cigotest_linux_amd64,cigotest_linux_386,cigotest_windows_amd64,cigotest_windows_386 -tag=SNAPSHOOT_THE_GOODONE -repo=cigotest -user=capitancambio
