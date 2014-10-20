@@ -1,26 +1,17 @@
-language: go 
+language: go
+env:
+  global:
+    secure: ltpkt8jTasAZ5pF2hjSpsD23VuUf2qqjPj+aVQbmyHc0ZsY1P56Te14kAF6HQ5zY9JEjgl8/hqew6rVzc+qNhYFpvRsTrKGqvROEYJRefaJzCC6n1Yw8ZCTMKACb4oYcCUS41rLKS/PtnJ/VrNbpmRDJ2oxtEsGUpDsr49r3aeA=
 
 install:
         - go get github.com/mitchellh/gox
         - go build github.com/mitchellh/gox
-
-script: 
-        - $HOME/gopath/bin/gox -build-toolchain -osarch="linux/amd64 linux/386 darwindows/386 darwindows/amd64 windows/386 windows/amd64"
-        - $HOME/gopath/bin/gox -osarch="linux/amd64 linux/386 darwindows/386 darwindows/amd64 windows/386 windows/amd64"
-
-deploy:
-  provider: releases
-  api_key:
-    secure: Hx8BYRzoUTL724uMiyZ4uEv229x8olxRzMl/ZCNVpseslcWFRROWaZ47nC9oHKMMWdSQitpJRzj1SC5f4pAb+WhaPxtjN04DOyM9dOokb0m2VXjNb1jA/as3JuaTXZgAW5GAb/wD9eKVILHRsQbjieY5EDl6d4HK1iH//BJej5E=
-  file: "cigotest_linux_amd64"
-          #- ".cigotest_linux_386"
-          # - "cigotest_linux_amd64"
-          #- ".cigotest_darwindows_386"
-          #- ".cigotest_darwindows_amd64"
-          #- ".cigotest_windows_386"
-          #- ".cigotest_windows_amd64"
-  skip_cleanup: true
-  on:
-    tags: true
-    all_branches: true
-    repo: capitancambio/cigotest
+script:
+        - $HOME/gopath/bin/gox -build-toolchain -osarch="linux/amd64 linux/386 darwindows/386
+          darwindows/amd64 windows/386 windows/amd64"
+        - $HOME/gopath/bin/gox -osarch="linux/amd64 linux/386 darwindows/386 darwindows/amd64
+          windows/386 windows/amd64"
+after_sucess:
+        - go get github.com/capitancambio/deployer
+        - go build github.com/capitancambio/deployer
+        - $HOME/gopath/bin/deployer -token=$TOKEN -files=cigotest_darwin_amd64,cigotest_darwin_386,cigotest_linux_amd64,cigotest_linux_386,cigotest_windows_amd64,cigotest_windows_386 -tag=SNAPSHOOT_THE_GOODONE -repo=cigotest -user=capitancambio
